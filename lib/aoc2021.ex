@@ -1,18 +1,18 @@
 defmodule Aoc2021 do
-  @moduledoc """
-  Documentation for `Aoc2021`.
-  """
+  alias Aoc2021.Utils.Input
+  alias Aoc2021.Day01
 
-  @doc """
-  Hello world.
+  def solve_puzzles do
+    solve_day01()
+  end
 
-  ## Examples
+  def solve_day01 do
+    input = Input.read_to_array_of_int("input_files/day01.txt")
+    response = Day01.part1(input)
+    puts(1, 1, response)
+  end
 
-      iex> Aoc2021.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def puts(day, part, response) do
+    IO.puts("Day#{day}, part#{part}: #{response}")
   end
 end
