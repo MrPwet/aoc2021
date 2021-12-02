@@ -1,4 +1,7 @@
 defmodule Aoc2021 do
+  @moduledoc """
+  Advent of code 2021
+  """
   alias Aoc2021.Utils.Input
   alias Aoc2021.Day01
 
@@ -8,8 +11,12 @@ defmodule Aoc2021 do
 
   def solve_day01 do
     input = Input.read_to_array_of_int("input_files/day01.txt")
-    response = Day01.part1(input)
-    puts(1, 1, response)
+
+    response_part1 = Day01.part1(input)
+    puts(1, 1, response_part1)
+
+    response_part2 = Day01.part2(input)
+    puts(1, 2, response_part2)
   end
 
   def puts(day, part, response) do

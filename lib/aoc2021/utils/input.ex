@@ -1,4 +1,7 @@
 defmodule Aoc2021.Utils.Input do
+  @moduledoc """
+  Some helpers to read problem inputs
+  """
   @spec read_to_array_of_int(String.t()) :: [integer()]
   def read_to_array_of_int(path) do
     path
