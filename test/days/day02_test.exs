@@ -16,7 +16,7 @@ defmodule Days.Day02Test do
     assert Day02.part1(@input) == 150
   end
 
-  # test "Day02 - Part2 - Example" do
-  #   assert Day02.part2(@input) == 0
-  # end
+  test "Day02 - Part2 - Example" do
+    assert Day02.part2(@input) == 900
+  end
 end
