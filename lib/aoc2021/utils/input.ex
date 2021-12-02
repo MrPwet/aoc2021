@@ -11,6 +11,14 @@ defmodule Aoc2021.Utils.Input do
     |> Enum.map(&string_to_integer!/1)
   end
 
+  @spec read_to_array_of_string(String.t()) :: [String.t()]
+  def read_to_array_of_string(path) do
+    path
+    |> File.read!()
+    |> String.trim()
+    |> String.split("\n")
+  end
+
   @spec string_to_integer!(String.t()) :: integer()
   def string_to_integer!(str) do
     {nb, _} = Integer.parse(str)
