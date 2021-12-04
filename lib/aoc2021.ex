@@ -35,8 +35,8 @@ defmodule Aoc2021 do
     response_part1 = Day03.part1(input)
     puts(3, 1, response_part1)
 
-    # response_part2 = Day03.part2(input)
-    # puts(1, 2, response_part2)
+    response_part2 = Day03.part2(input)
+    puts(3, 2, response_part2)
   end
 
   defp puts(day, part, response) do
