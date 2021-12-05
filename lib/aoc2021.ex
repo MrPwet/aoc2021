@@ -3,7 +3,7 @@ defmodule Aoc2021 do
   Advent of code 2021
   """
   alias Aoc2021.Utils.Input
-  alias Aoc2021.{Day01, Day02, Day03}
+  alias Aoc2021.{Day01, Day02, Day03, Day04}
 
   def solve_puzzles do
     solve_day01()
@@ -37,6 +37,16 @@ defmodule Aoc2021 do
 
     response_part2 = Day03.part2(input)
     puts(3, 2, response_part2)
+  end
+
+  def solve_day04 do
+    input = Input.read_to_array_of_string("input_files/day04.txt", "\n\n")
+
+    response_part1 = Day04.part1(input)
+    puts(4, 1, response_part1)
+
+    # response_part2 = Day04.part2(input)
+    # puts(4, 2, response_part2)
   end
 
   defp puts(day, part, response) do
