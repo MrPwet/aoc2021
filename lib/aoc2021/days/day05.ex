@@ -28,6 +28,24 @@ defmodule Aoc2021.Day05 do
   end
 
   def part2(input) do
+    vents =
+      input
+      |> Enum.map(&HydrothermalVents.create/1)
 
+    sea_map =
+      vents
+      |> Enum.reduce(%{}, fn (vent, sea_map) ->
+        vent
+        |> HydrothermalVents.get_all_points()
+        |> Enum.reduce(sea_map, fn (point, sea_map) ->
+          sea_map
+          |> Map.update(point, 1, &(&1 + 1))
+        end)
+      end)
+
+    sea_map
+    |> Map.values()
+    |> Enum.filter(&(&1 >= 2))
+    |> length()
   end
 end

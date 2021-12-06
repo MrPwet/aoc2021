@@ -35,14 +35,17 @@ defmodule Aoc2021.Day05.HydrothermalVents do
   @spec get_all_points(t()) :: [Vector2d.t()]
   def get_all_points(hydrothermal_vents) do
     %{from: v1, to: v2} = hydrothermal_vents
-    {dx, dy} = compute_deltas(v1, v2)
-    for x <- (v1.x)..(v1.x + dx),
-        y <- (v1.y)..(v1.y + dy), do: %Vector2d{x: x, y: y}
-  end
 
-  @spec compute_deltas(Vector2d.t(), Vector2d.t()) :: {integer(), integer()}
-  defp compute_deltas(v1, v2) do
-    {v2.x - v1.x, v2.y - v1.y}
+    cond do
+      v1.x - v2.x == 0 ->
+        Enum.map((v1.y)..(v2.y), &(%Vector2d{x: v1.x, y: &1}))
+      v1.y - v2.y == 0 ->
+        Enum.map((v1.x)..(v2.x), &(%Vector2d{x: &1, y: v1.y}))
+      true ->
+        (v1.x)..(v2.x)
+        |> Enum.zip((v1.y)..(v2.y))
+        |> Enum.map(fn {x, y} -> %Vector2d{x: x, y: y} end)
+    end
   end
 
   @spec diagonal?(t()) :: boolean()
