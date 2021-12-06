@@ -24,12 +24,13 @@ defmodule Aoc2021.Day03 do
   end
 
   @spec init_count_map(integer()) :: count_map()
-  defp init_count_map(size), do: for position <- 0..(size - 1), into: %{}, do: {position, {0, 0}}
+  defp init_count_map(size), do: for(position <- 0..(size - 1), into: %{}, do: {position, {0, 0}})
 
   @spec count_most_common_bit([String.t()]) :: any()
   defp count_most_common_bit(input) do
     size = String.length(hd(input))
     count_map = init_count_map(size)
+
     input
     |> Enum.reduce(count_map, &count_bit_number/2)
   end
@@ -56,8 +57,9 @@ defmodule Aoc2021.Day03 do
   @spec generate_gamma_rate(count_map()) :: String.t()
   defp generate_gamma_rate(count_map) do
     size = length(Map.keys(count_map))
+
     0..(size - 1)
-    |> Enum.map_join(fn (position) ->
+    |> Enum.map_join(fn position ->
       %{^position => {x0, x1}} = count_map
       if x0 > x1, do: "0", else: "1"
     end)
@@ -67,7 +69,7 @@ defmodule Aoc2021.Day03 do
   defp generate_epsilon_rate(gamma_rate) do
     gamma_rate
     |> String.graphemes()
-    |> Enum.map_join(&(if &1 == "0", do: "1", else: "0"))
+    |> Enum.map_join(&if &1 == "0", do: "1", else: "0")
   end
 
   @spec compute_power_consumption(String.t(), String.t()) :: integer()
@@ -83,7 +85,7 @@ defmodule Aoc2021.Day03 do
 
     {[input], _} =
       0..(size - 1)
-      |> Enum.reduce({input, ""}, fn (position, {input, prefix}) ->
+      |> Enum.reduce({input, ""}, fn position, {input, prefix} ->
         prefix = prefix <> most_common_bit(input, position)
         {keep_numbers_that_starts_with(input, prefix), prefix}
       end)
@@ -97,43 +99,49 @@ defmodule Aoc2021.Day03 do
 
     {[input], _} =
       0..(size - 1)
-      |> Enum.reduce({input, ""}, fn (position, {input, prefix}) ->
+      |> Enum.reduce({input, ""}, fn position, {input, prefix} ->
         prefix = prefix <> least_common_bit(input, position)
         {keep_numbers_that_starts_with(input, prefix), prefix}
       end)
+
     input
   end
 
   @spec most_common_bit([String.t()], integer()) :: String.t()
   defp most_common_bit([input], position), do: String.at(input, position)
+
   defp most_common_bit(input, position) do
     {x0, x1} =
       input
-      |> Enum.reduce({0, 0}, fn (number, {x0, x1}) ->
+      |> Enum.reduce({0, 0}, fn number, {x0, x1} ->
         case String.at(number, position) do
           "0" -> {x0 + 1, x1}
           "1" -> {x0, x1 + 1}
         end
       end)
+
     if x0 > x1, do: "0", else: "1"
   end
 
   @spec least_common_bit([String.t()], integer()) :: String.t()
   defp least_common_bit([input], position), do: String.at(input, position)
+
   defp least_common_bit(input, position) do
     {x0, x1} =
       input
-      |> Enum.reduce({0, 0}, fn (number, {x0, x1}) ->
+      |> Enum.reduce({0, 0}, fn number, {x0, x1} ->
         case String.at(number, position) do
           "0" -> {x0 + 1, x1}
           "1" -> {x0, x1 + 1}
         end
       end)
+
     if x0 <= x1, do: "0", else: "1"
   end
 
   @spec keep_numbers_that_starts_with([String.t()], String.t()) :: [String.t()]
-  defp keep_numbers_that_starts_with(input, prefix), do: Enum.filter(input, &(String.starts_with?(&1, prefix)))
+  defp keep_numbers_that_starts_with(input, prefix),
+    do: Enum.filter(input, &String.starts_with?(&1, prefix))
 
   @spec compute_life_support_rating(String.t(), String.t()) :: integer()
   defp compute_life_support_rating(oxygen_generator_rating, co2_scrubber_rating) do

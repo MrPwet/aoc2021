@@ -11,14 +11,14 @@ defmodule Aoc2021.Day04 do
 
     {bingo_numbers, _grids, winning_grid} =
       bingo_numbers
-      |> Enum.reduce_while({[], bingo_grids, nil}, fn (number, {numbers, grids, _winning_grid}) ->
+      |> Enum.reduce_while({[], bingo_grids, nil}, fn number, {numbers, grids, _winning_grid} ->
         numbers = numbers ++ [number]
 
         case BingoGrid.winning_grids?(numbers, grids) do
           :no -> {:cont, {numbers, grids, nil}}
           {:yes, grid} -> {:halt, {numbers, nil, grid}}
         end
-    end)
+      end)
 
     BingoGrid.get_unmarked_numbers(bingo_numbers, winning_grid)
     |> Enum.sum()
@@ -30,18 +30,19 @@ defmodule Aoc2021.Day04 do
 
     {bingo_numbers, _grids, last_winning_grid} =
       bingo_numbers
-      |> Enum.reduce_while({[], bingo_grids, nil}, fn (number, {numbers, grids, _winning_grid}) ->
+      |> Enum.reduce_while({[], bingo_grids, nil}, fn number, {numbers, grids, _winning_grid} ->
         numbers = numbers ++ [number]
 
         with 1 <- length(grids),
              [grid] <- grids,
              true <- BingoGrid.wins?(numbers, grid) do
-              {:halt, {numbers, nil, grid}}
+          {:halt, {numbers, nil, grid}}
         else
           _ ->
             grids =
               grids
-              |> Enum.reject(&(BingoGrid.wins?(numbers, &1)))
+              |> Enum.reject(&BingoGrid.wins?(numbers, &1))
+
             {:cont, {numbers, grids, nil}}
         end
       end)

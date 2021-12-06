@@ -42,14 +42,14 @@ defmodule Aoc2021.Day02 do
 
   @spec compute_position([instruction()]) :: position()
   defp compute_position(instructions) do
-    Enum.reduce(instructions, {0, 0}, fn (instruction, position) ->
+    Enum.reduce(instructions, {0, 0}, fn instruction, position ->
       next_position(position, instruction)
     end)
   end
 
   @spec compute_position_with_aim([instruction()]) :: position_with_aim()
   defp compute_position_with_aim(instructions) do
-    Enum.reduce(instructions, {0, 0, 0}, fn (instruction, position) ->
+    Enum.reduce(instructions, {0, 0, 0}, fn instruction, position ->
       next_position_with_aim(position, instruction)
     end)
   end
@@ -61,7 +61,7 @@ defmodule Aoc2021.Day02 do
 
   @spec next_position_with_aim(position_with_aim(), instruction()) :: position_with_aim()
   defp next_position_with_aim({horizontal, depth, aim}, {:forward, value}),
-    do: {horizontal + value, depth + (aim * value), aim}
+    do: {horizontal + value, depth + aim * value, aim}
 
   defp next_position_with_aim({horizontal, depth, aim}, {:down, value}),
     do: {horizontal, depth, aim + value}

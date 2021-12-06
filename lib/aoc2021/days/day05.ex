@@ -12,10 +12,10 @@ defmodule Aoc2021.Day05 do
 
     sea_map =
       vents
-      |> Enum.reduce(%{}, fn (vent, sea_map) ->
+      |> Enum.reduce(%{}, fn vent, sea_map ->
         vent
         |> HydrothermalVents.get_all_points()
-        |> Enum.reduce(sea_map, fn (point, sea_map) ->
+        |> Enum.reduce(sea_map, fn point, sea_map ->
           sea_map
           |> Map.update(point, 1, &(&1 + 1))
         end)
@@ -34,10 +34,10 @@ defmodule Aoc2021.Day05 do
 
     sea_map =
       vents
-      |> Enum.reduce(%{}, fn (vent, sea_map) ->
+      |> Enum.reduce(%{}, fn vent, sea_map ->
         vent
         |> HydrothermalVents.get_all_points()
-        |> Enum.reduce(sea_map, fn (point, sea_map) ->
+        |> Enum.reduce(sea_map, fn point, sea_map ->
           sea_map
           |> Map.update(point, 1, &(&1 + 1))
         end)

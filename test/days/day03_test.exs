@@ -15,7 +15,7 @@ defmodule Days.Day03Test do
     "10000",
     "11001",
     "00010",
-    "01010",
+    "01010"
   ]
 
   test "Day03 - Part1 - Example" do

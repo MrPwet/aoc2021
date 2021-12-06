@@ -4,9 +4,9 @@ defmodule Aoc2021.Utils.Vector2d do
   """
 
   @type t() :: %__MODULE__{
-    x: integer(),
-    y: integer()
-  }
+          x: integer(),
+          y: integer()
+        }
   defstruct x: 0,
             y: 0
 end
