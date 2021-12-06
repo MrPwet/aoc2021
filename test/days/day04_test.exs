@@ -32,7 +32,7 @@ defmodule Days.Day04Test do
     assert Day04.part1(@input) == 4512
   end
 
-  # test "Day04 - Part2 - Example" do
-  #   assert Day04.part2(@input) == 230
-  # end
+  test "Day04 - Part2 - Example" do
+    assert Day04.part2(@input) == 1924
+  end
 end

@@ -1,4 +1,7 @@
 defmodule Aoc2021.Day04.BingoGrid do
+  @moduledoc """
+  Bingo related code
+  """
   alias Aoc2021.Utils.Input
 
   @type t() :: %__MODULE__{
@@ -16,7 +19,6 @@ defmodule Aoc2021.Day04.BingoGrid do
       input
       |> String.trim()
       |> String.split("\n")
-      |> IO.inspect(label: "ROW")
       |> Enum.map(&parse_row/1)
 
     nb_rows = length(rows)
@@ -55,15 +57,13 @@ defmodule Aoc2021.Day04.BingoGrid do
 
   @spec contains([integer()], [integer()]) :: boolean()
   defp contains(lst, bingo_numbers) do
-    IO.inspect(lst, label: "lst")
-    IO.inspect(bingo_numbers, label: "bingo_numbers", charlists: :as_lists)
     Enum.all?(lst, fn number ->
       Enum.member?(bingo_numbers, number)
     end)
   end
 
   @spec wins?([integer()], t()) :: boolean()
-  defp wins?(bingo_numbers, bingo_grid) do
+  def wins?(bingo_numbers, bingo_grid) do
     win_row =
       bingo_grid
       |> get_rows()
