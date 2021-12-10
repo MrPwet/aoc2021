@@ -2,12 +2,12 @@ defmodule Aoc2021.Utils.Input do
   @moduledoc """
   Some helpers to read problem inputs
   """
-  @spec read_to_array_of_int(String.t()) :: [integer()]
-  def read_to_array_of_int(path) do
+  @spec read_to_array_of_int(String.t(), String.t()) :: [integer()]
+  def read_to_array_of_int(path, separator \\ "\n") do
     path
     |> File.read!()
     |> String.trim()
-    |> String.split("\n")
+    |> String.split(separator)
     |> Enum.map(&string_to_integer!/1)
   end
 
