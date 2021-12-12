@@ -4,7 +4,7 @@ defmodule Aoc2021 do
   """
 
   alias Aoc2021.Utils.Input
-  alias Aoc2021.{Day01, Day02, Day03, Day04, Day05, Day06, Day07}
+  alias Aoc2021.{Day01, Day02, Day03, Day04, Day05, Day06, Day07, Day08}
 
   def solve_puzzles do
     solve_day01()
@@ -78,6 +78,16 @@ defmodule Aoc2021 do
 
     response_part2 = Day07.part2(input)
     puts(7, 2, response_part2)
+  end
+
+  def solve_day08 do
+    input = Input.read_to_array_of_string("input_files/day08.txt")
+
+    response_part1 = Day08.part1(input)
+    puts(8, 1, response_part1)
+
+    # response_part2 = Day08.part2(input)
+    # puts(8, 2, response_part2)
   end
 
   defp puts(day, part, response) do
